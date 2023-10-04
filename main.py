@@ -207,7 +207,7 @@ def translate_menu(lang):
         if lang == 'DE':
             print(textcl(':D:', Color.BLUE), textcl(translate_en_de(to_translate), Color.GREEN))
         elif lang == 'EN':
-            print(textcl('Translation:', Color.BLUE), textcl(translate_de_en(to_translate), Color.GREEN))
+            print(textcl(':E:', Color.BLUE), textcl(translate_de_en(to_translate), Color.GREEN))
 
 
 def main():
