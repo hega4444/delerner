@@ -38,7 +38,6 @@ def read_and_sort_dictionary(filename):
     cursor.execute('SELECT * FROM simple_translation')
     dictionary = cursor.fetchall()
 
-
     # Sort the list in descending order based on the third element of each tuple
     dictionary = sorted(dictionary, key=lambda x: x[3] if isinstance(x[3], float) else 0, reverse=True)
 
@@ -103,6 +102,7 @@ def play_cards(this_cards):
                     user_input = -1
 
         if user_input-1 != answer:
+            print(textcl(f'{guess}', Color.BLUE))
             print(textcl(f"Correct answer: {cards[chosen_cards[guessed_word]][1]}.", Color.RED))
             time.sleep(1)
         else:
