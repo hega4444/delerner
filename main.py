@@ -46,6 +46,15 @@ def read_and_sort_dictionary(filename):
     conn.close()
     return dictionary
 
+def relevant_trans(term):
+
+    term1_words = [word.lower() for word in term[0].split()]
+    term2_words = [word.lower() for word in term[1].split()]
+    for t1 in term1_words:
+        if t1 in term2_words:
+            return False
+    return True
+
 def lookup(dictionary: list, word: str) -> str:
     for w in dictionary:
         if w[0].lower() == word.lower():
@@ -198,11 +207,29 @@ def read_article(dictionary):
         if l:=lookup(dictionary, w):
             vocabulary.append(l)
     vocabulary = sorted(vocabulary, key=lambda x: x[3] if isinstance(x[3], float) else 10, reverse=False)
+    vocabulary = [v for v in vocabulary if relevant_trans(v) and len(v[1]) > 3]
+
+        # Initialize a dictionary to track seen keys
+    seen_keys = {}
+
+    # List to store unique tuples based on the first element (key)
+    unique_tuples = []
+
+    for item in vocabulary:
+        key = item[0]  # Get the key (first element of the tuple)
+
+        # Check if the key is already seen
+        if key not in seen_keys:
+            seen_keys[key] = True  # Mark this key as seen
+            unique_tuples.append(item)
+        
+    vocabulary = unique_tuples
 
     print("Press 'v' to print vocabulary, 'l' to play cards game with it.", end='', flush=True)
     option = get_key()
 
     if option.lower() == 'v':
+        print()
         print()
         for w in vocabulary:
             print(textcl(f'{w[0]}: ', Color.BLUE), textcl(f'{w[1]}', Color.GREEN))
