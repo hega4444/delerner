@@ -203,6 +203,7 @@ def read_article(dictionary):
     option = get_key()
 
     if option.lower() == 'v':
+        print()
         for w in vocabulary:
             print(textcl(f'{w[0]}: ', Color.BLUE), textcl(f'{w[1]}', Color.GREEN))
         print()
