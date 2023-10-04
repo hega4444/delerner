@@ -206,7 +206,7 @@ def read_article(dictionary):
     for w in words_in_article:
         if l:=lookup(dictionary, w):
             vocabulary.append(l)
-    vocabulary = sorted(vocabulary, key=lambda x: x[3] if isinstance(x[3], float) else 10, reverse=False)
+
     vocabulary = [v for v in vocabulary if relevant_trans(v) and len(v[1]) > 3 and not v[1].istitle() ]
 
         # Initialize a dictionary to track seen keys
@@ -224,6 +224,7 @@ def read_article(dictionary):
             unique_tuples.append(item)
         
     vocabulary = unique_tuples
+    vocabulary = sorted(vocabulary, key=lambda x: x[0].lower(), reverse=False)
 
     print("Press 'v' to print vocabulary, 'l' to play cards game with it.", end='', flush=True)
     option = get_key()
@@ -236,6 +237,7 @@ def read_article(dictionary):
         print()
         input('Press any key to continue...')
     else:
+        vocabulary = sorted(vocabulary, key=lambda x: x[3] if isinstance(x[3], float) else 10, reverse=False)
         cards_game(vocabulary, loadFile=False)
         
 def translate_menu(lang):
