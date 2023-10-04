@@ -207,7 +207,7 @@ def read_article(dictionary):
         if l:=lookup(dictionary, w):
             vocabulary.append(l)
     vocabulary = sorted(vocabulary, key=lambda x: x[3] if isinstance(x[3], float) else 10, reverse=False)
-    vocabulary = [v for v in vocabulary if relevant_trans(v) and len(v[1]) > 3]
+    vocabulary = [v for v in vocabulary if relevant_trans(v) and len(v[1]) > 3 and not v[1].istitle() ]
 
         # Initialize a dictionary to track seen keys
     seen_keys = {}
