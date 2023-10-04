@@ -4,11 +4,13 @@ import re
 
 def extract_words_from_webpage(url):
     # Fetch the webpage content
-    response = requests.get(url)
-    if response.status_code != 200:
-        print('Failed to fetch the webpage.')
-        return []
-
+    try:
+        response = requests.get(url)
+        if response.status_code != 200:
+            print('Failed to fetch the webpage.')
+            return []
+    except Exception:
+        return None
     # Parse HTML content
     soup = BeautifulSoup(response.content, 'html.parser')
 

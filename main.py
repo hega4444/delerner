@@ -92,12 +92,8 @@ def play_cards(this_cards):
         except Exception:
             if isinstance(user_input, str):
                 if user_input.lower() == 'q':
-                    user_input = 0
-                elif user_input.lower() == 'w':
-                    user_input = 1
-                elif user_input.lower() == 'e':
-                    user_input = 2
-                elif user_input.lower() == "s":
+                    exit()
+                elif user_input.lower() == 's':
                     return None
                 #special command to skip the deck
                 elif user_input.lower() == 'x':
@@ -186,8 +182,15 @@ def read_article(dictionary):
     clear_screen()
     url = input('Enter an URL to analize:')
     words_in_article = extract_words_from_webpage(url)
+    words_in_article = [w for w in words_in_article if len(w) > 4]
     print('Creating vocabulary...')
     vocabulary = []
+
+    if not words_in_article:
+        print('Article could not be read. Try again...')
+        time.sleep(0.5)
+        return
+    
     for w in words_in_article:
         if l:=lookup(dictionary, w):
             vocabulary.append(l)
@@ -196,13 +199,16 @@ def read_article(dictionary):
         
 def translate_menu(lang):
     clear_screen()
-    to_translate = input('Enter an expression:')
+    print('Enter your expressions. Enter to exit.')
+    to_translate = " "
     while to_translate != "" and to_translate != "q":
+        to_translate = input(f':{"E" if lang == "DE" else "D"}:')
+
         if lang == 'DE':
-            print(textcl('Translation:', Color.BLUE), textcl(translate_en_de(to_translate), Color.GREEN))
+            print(textcl(':D:', Color.BLUE), textcl(translate_en_de(to_translate), Color.GREEN))
         elif lang == 'EN':
             print(textcl('Translation:', Color.BLUE), textcl(translate_de_en(to_translate), Color.GREEN))
-        to_translate = input('Enter an expression:')
+
 
 def main():
     dictionary = read_and_sort_dictionary('de-en.sqlite3')
@@ -226,6 +232,7 @@ def main():
         elif option == '4':
             translate_menu('EN')
         elif option == '5':
+            print()
             break
 
 
