@@ -84,6 +84,7 @@ def play_cards(this_cards):
             text = option
             print(textcl(f'{i+1}: {text}', Color.GREEN))
         
+        print()
         print(textcl('Your answer:', Color.GREEN), end='', flush=True)
         user_input = get_key()
         clear_screen()
@@ -131,12 +132,13 @@ def cards_game(dictionary, loadFile = False):
             # Load the JSON data from the file
             with open(file_path, 'r') as json_file:
                 loaded_data = json.load(json_file)
+            clear_screen()
             print('Loading user history...')
             level = loaded_data['level']
             print(f'Level: {level}.')
             lastindex = loaded_data['index']
             words['trained'] = loaded_data['trained']
-            time.sleep(0.5)
+            time.sleep(1)
 
         except FileNotFoundError:
             lastindex = 0
