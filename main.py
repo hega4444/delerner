@@ -216,7 +216,7 @@ def main():
     while True:
         clear_screen()
         print(textcl('De-Lerner', Color.RED))
-        print(textcl('1. General cards', Color.YELLOW))
+        print(textcl('1. General cards (s/x/q quit the game)', Color.YELLOW))
         print(textcl('2. Train specific vocabulary with Article Reader', Color.YELLOW))
         print(textcl('3. Translate to DE', Color.YELLOW))
         print(textcl('4. Translate to EN', Color.YELLOW))
