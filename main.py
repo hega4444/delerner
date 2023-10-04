@@ -198,7 +198,17 @@ def read_article(dictionary):
         if l:=lookup(dictionary, w):
             vocabulary.append(l)
     vocabulary = sorted(vocabulary, key=lambda x: x[3] if isinstance(x[3], float) else 10, reverse=False)
-    cards_game(vocabulary, loadFile=False)
+
+    print("Press 'v' to print vocabulary, 'l' to play cards game with it.", end='', flush=True)
+    option = get_key()
+
+    if option.lower() == 'v':
+        for w in vocabulary:
+            print(textcl(f'{w[0]}: ', Color.BLUE), textcl(f'{w[1]}', Color.GREEN))
+        print()
+        input('Press any key to continue...')
+    else:
+        cards_game(vocabulary, loadFile=False)
         
 def translate_menu(lang):
     clear_screen()
