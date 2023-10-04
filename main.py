@@ -184,14 +184,15 @@ def read_article(dictionary):
     clear_screen()
     url = input('Enter an URL to analize:')
     words_in_article = extract_words_from_webpage(url)
-    words_in_article = [w for w in words_in_article if len(w) > 4]
-    print('Creating vocabulary...')
-    vocabulary = []
 
     if not words_in_article:
         print('Article could not be read. Try again...')
         time.sleep(0.5)
         return
+    
+    words_in_article = [w for w in words_in_article if len(w) > 4]
+    print('Creating vocabulary...')
+    vocabulary = []
     
     for w in words_in_article:
         if l:=lookup(dictionary, w):
